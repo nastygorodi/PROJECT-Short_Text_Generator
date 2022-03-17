@@ -1,0 +1,38 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notesbeginsof</help_text><element><id>UMLClass</id><coordinates><x>620</x><y>565</y><w>270</w><h>110</h></coordinates><panel_attributes>Headline
+--
+-body: String[]
+--
+saveToFile(file: File)
+print()
+splitSentence(sentence: String)
+countFrequency(): Dict[String, Dict[String, int]]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>375</y><w>270</w><h>100</h></coordinates><panel_attributes>Text
+--
+-listOfHeadlines: Headline[]
+--
+saveToFile(file: File)
+print()
+addHeadline(headline: Headline)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>375</y><w>270</w><h>100</h></coordinates><panel_attributes>File
+--
+-path: String
+--
+open()
+close()
+extractText(): Text</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>206</y><w>270</w><h>100</h></coordinates><panel_attributes>Vocabulary
+--
+-text: Text
+-vocabWords: Dict[String, Dict[String, int]]
+-vocabMostFrequent: Dict[String, String] 
+--
+buildVocab()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>47</y><w>270</w><h>100</h></coordinates><panel_attributes>Generator
+--
+-lengthOfHeadlines: int
+-numberOfHeadlines: int
+-beginsOfHeadlines: Headline[]
+--
+generateHeadlines(contentFile: File): Headline[]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>207</y><w>270</w><h>70</h></coordinates><panel_attributes>MarcovChain
+--
+-vocabulary: Vocabulary
+--
+generateNextWord(prevWord: String): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>467</y><w>50</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+0..*</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>227</y><w>300</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+1</panel_attributes><additional_attributes>280;20;10;20</additional_attributes></element></diagram>
