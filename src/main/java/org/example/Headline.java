@@ -1,6 +1,6 @@
-package main;
+package org.example;
 
-
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -30,7 +30,13 @@ public class Headline {
             res += word + " ";
         }
         res = res.substring(0, res.length() - 1) + ".";
-        System.out.println(res);
+        try{
+            PrintStream printStream = new PrintStream(System.out, true, "UTF-8");
+            printStream.println(res);
+        }
+        catch ( java.io.UnsupportedEncodingException ex){
+            System.out.println("Can not write in console");
+        }
     }
     private void splitSentence(String sentence){
         final char[] special_symbols = {',', ':', ';', ' ', '(', ')', '\n', '-'};

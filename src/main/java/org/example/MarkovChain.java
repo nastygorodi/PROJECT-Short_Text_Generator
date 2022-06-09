@@ -1,5 +1,4 @@
-package main;
-
+package org.example;
 
 
 import java.util.ArrayList;
