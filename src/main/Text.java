@@ -25,7 +25,7 @@ public class Text {
             headline.print();
         }
     }
-    void addHeadline(Headline headline){
+    public void addHeadline(Headline headline){
         listOfHeadlines.add(headline);
     }
 }

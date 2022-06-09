@@ -5,14 +5,25 @@ import main.MarkovChain;
 import main.Vocabulary;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MarkovChainTest {
 
     @Test
     void generateFirstWord() {
-        FileWorker file = new FileWorker("C:\\project\\Short_Text_Generator\\src\\test\\test2.txt");
-        file.open();
+        InputStream inp = null;
+        try {
+            inp = getClass().getResource("resources/test2.txt").openStream();
+        }
+        catch (java.io.IOException ex){
+            System.out.println("Cant read test file");
+        }
+        FileWorker file = new FileWorker(inp);
         MarkovChain chain = new MarkovChain(file.extractText());
         chain.setSeed(42);
         String word = chain.generateFirstWord();

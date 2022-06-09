@@ -16,7 +16,7 @@ class GeneratorTest {
     @Test
     void generateHeadlines() {
         String trueRes = "Искусственная еда.\nЕда искусственная.\n";
-        FileWorker file = new FileWorker("C:\\project\\Short_Text_Generator\\src\\test\\test2.txt");
+        FileWorker file = new FileWorker("C:\\project_idea\\Short_Text_Generator\\src\\test\\test2.txt");
         file.open();
 
         OutputStream os = new ByteArrayOutputStream();

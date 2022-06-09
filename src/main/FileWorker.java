@@ -1,23 +1,32 @@
 package main;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class FileWorker {
     private final String path;
+    private InputStream inp;
     private File file;
     public FileWorker(String new_path){
         path = new_path;
     }
+    public FileWorker(InputStream new_inp){
+        inp = new_inp;
+        path = "";
+    }
     public Boolean open(){
-        file = new File(path);
-        if (!file.exists()) {
-            System.out.println("File '" + path + "' not exists\n");
-            return false;
+        if (path  !=  "") {
+            file = new File(path);
+            if (!file.exists()) {
+                System.out.println("File '" + path + "' not exists\n");
+                return false;
+            }
+            try{
+                inp = new FileInputStream(path);
+            }
+            catch (java.io.FileNotFoundException ex) {
+                System.out.println("Can not read file " + path);
+            }
         }
         return true;
     }
@@ -26,14 +35,14 @@ public class FileWorker {
         Text text = new Text();
         final char[] end_symbols = {'!', '?', '.'};
         try{
-            FileReader fileReader = new FileReader(file);
+            Reader fileReader = new InputStreamReader(inp, StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(fileReader);
             String sentence = "";
             String line = reader.readLine() + "\n";
             while (line != null) {
                 line = line.replace(" -", " ");
                 for (int i = 0; i < line.length(); i++){
-                    if (new String(end_symbols).indexOf(line.charAt(i)) != -1){
+                    if (line.charAt(i) == '?' || line.charAt(i) == '!' || line.charAt(i) == '.'){
                         if (sentence.length() > 0) {
                             text.addHeadline(new Headline(sentence));
                             sentence = "";
@@ -48,10 +57,9 @@ public class FileWorker {
             if (sentence.length() > 0) {
                 text.addHeadline(new Headline(sentence));
             }
-            reader.close();
         }
         catch (IOException ex){
-            System.out.println("Файла '" + path + "' не существует!");
+            System.out.println("Файла  не существует!");
         }
         return text;
     }

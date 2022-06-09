@@ -4,6 +4,7 @@ import main.FileWorker;
 import main.Vocabulary;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,8 +16,14 @@ class VocabularyTest {
 
     @Test
     void getAllWords() {
-        FileWorker file = new FileWorker("C:\\project\\Short_Text_Generator\\src\\test\\test1.txt");
-        file.open();
+        InputStream inp = null;
+        try {
+            inp = getClass().getResource("resources/test1.txt").openStream();
+        }
+        catch (java.io.IOException ex){
+            System.out.println("Can not read test file");
+        }
+        FileWorker file = new FileWorker(inp);
         Vocabulary vocab = new Vocabulary(file.extractText());
         ArrayList<String> actualRes = new ArrayList<>(vocab.getAllWords());
         ArrayList<String> trueRes = new ArrayList<>(Arrays.asList("на",
@@ -31,7 +38,7 @@ class VocabularyTest {
     }
     @Test
     void getFreqWords() {
-        FileWorker file = new FileWorker("C:\\project\\Short_Text_Generator\\src\\test\\test1.txt");
+        FileWorker file = new FileWorker("C:\\project_idea\\Short_Text_Generator\\src\\test\\test1.txt");
         file.open();
         Vocabulary vocab = new Vocabulary(file.extractText());
         HashMap<String, Integer> actualRes = new HashMap<>(vocab.getFreqWords());

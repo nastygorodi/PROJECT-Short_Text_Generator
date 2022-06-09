@@ -6,8 +6,10 @@ import main.Text;
 import org.junit.jupiter.api.Test;
 
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,14 +17,27 @@ class FileWorkerTest {
 
     @Test
     void open() {
-        assertTrue(new FileWorker("C:\\project\\Short_Text_Generator\\src\\test\\test1.txt").open());
+        InputStream inp = null;
+        try {
+            inp = getClass().getResource("resources/test1.txt").openStream();
+        }
+        catch (java.io.IOException ex){
+            System.out.println("Cant read test file");
+        }
+        assertTrue(new FileWorker(inp).open());
         assertFalse(new FileWorker("C:\\projecort_Text_Generator\\test1.txt").open());
     }
 
     @Test
     void extractText() {
-        FileWorker file = new FileWorker("C:\\project\\Short_Text_Generator\\src\\test\\test1.txt");
-        file.open();
+        InputStream inp = null;
+        try {
+            inp = getClass().getResource("resources/test1.txt").openStream();
+        }
+        catch (java.io.IOException ex){
+            System.out.println("Cant read test file");
+        }
+        FileWorker file = new FileWorker(inp);
         Text trueRes = new Text(5);
         trueRes.addHeadline(0, new Headline("на дворе играла кошка с котятами"));
         trueRes.addHeadline(1, new Headline("вдруг с вышины бросился огромный орёл"));
@@ -30,8 +45,9 @@ class FileWorkerTest {
         trueRes.addHeadline(3, new Headline("мать кошка быстро\n" +
                 "        вцепилась в орла"));
         trueRes.addHeadline(4, new Headline("орёл бросил котенка стал бороться с кошкой"));
+        ArrayList<Headline> actualRes = file.extractText().getHeadlines();
         for (int i = 0; i < 5; i++){
-            assertEquals(trueRes.getHeadlines().get(i).getBody(), file.extractText().getHeadlines().get(i).getBody());
+            assertEquals(trueRes.getHeadlines().get(i).getBody(), actualRes.get(i).getBody());
         }
     }
 }
