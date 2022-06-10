@@ -15,12 +15,12 @@ class FileWorkerTest {
         InputStream inp = null;
         try {
             inp = Thread.currentThread().getContextClassLoader().getResource("test1.txt").openStream();
+            assertTrue(new FileWorker(inp).open());
+            assertFalse(new FileWorker("../../resourcdses/test1.txt").open());
         }
         catch (java.io.IOException ex){
             System.out.println("Cant read test file");
         }
-        assertTrue(new FileWorker(inp).open());
-        assertFalse(new FileWorker("../../resourcdses/test1.txt").open());
     }
 
     @Test
