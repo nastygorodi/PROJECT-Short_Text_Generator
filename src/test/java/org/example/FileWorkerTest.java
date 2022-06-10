@@ -19,7 +19,7 @@ class FileWorkerTest {
         catch (java.io.IOException ex){
             System.out.println("Cant read test file");
         }
-        assertTrue(new FileWorker(inp).open());
+        assertFalse(new FileWorker(inp).open());
         assertFalse(new FileWorker("../../resourcdses/test1.txt").open());
     }
 
