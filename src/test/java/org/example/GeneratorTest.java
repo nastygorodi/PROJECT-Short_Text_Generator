@@ -14,12 +14,9 @@ class GeneratorTest {
     @Test
     void generateHeadlines() {
         String trueRes = "Искусственная еда.\nЕда искусственная.\n";
-        InputStream inp = null;
-        try {
-            inp = Thread.currentThread().getContextClassLoader().getResource("test2.txt").openStream();
+        try (InputStream inp = Thread.currentThread().getContextClassLoader().getResource("test2.txt").openStream()){
             FileWorker file = new FileWorker(inp);
             file.open();
-
             OutputStream os = new ByteArrayOutputStream();
             System.setOut(new PrintStream(os));
             MarkovChain chain = new MarkovChain(file.extractText());

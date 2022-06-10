@@ -18,9 +18,7 @@ class VocabularyTest {
 
     @Test
     void getAllWords() {
-        InputStream inp = null;
-        try {
-            inp = Thread.currentThread().getContextClassLoader().getResource("test1.txt").openStream();
+        try (InputStream inp = Thread.currentThread().getContextClassLoader().getResource("test1.txt").openStream()){
             FileWorker file = new FileWorker(inp);
             Vocabulary vocab = new Vocabulary(file.extractText());
             ArrayList<String> actualRes = new ArrayList<>(vocab.getAllWords());
@@ -41,9 +39,7 @@ class VocabularyTest {
 
     @Test
     void getFreqWords() {
-        InputStream inp = null;
-        try {
-            inp = Thread.currentThread().getContextClassLoader().getResource("test1.txt").openStream();
+        try (InputStream inp = Thread.currentThread().getContextClassLoader().getResource("test1.txt").openStream()){
             FileWorker file = new FileWorker(inp);
             Vocabulary vocab = new Vocabulary(file.extractText());
             HashMap<String, Integer> actualRes = new HashMap<>(vocab.getFreqWords());

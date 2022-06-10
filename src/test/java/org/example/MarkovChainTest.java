@@ -18,9 +18,7 @@ class MarkovChainTest {
 
     @Test
     void generateFirstWord() {
-        InputStream inp = null;
-        try {
-            inp = Thread.currentThread().getContextClassLoader().getResource("test2.txt").openStream();
+        try (InputStream inp = Thread.currentThread().getContextClassLoader().getResource("test2.txt").openStream()){
             FileWorker file = new FileWorker(inp);
             MarkovChain chain = new MarkovChain(file.extractText());
             chain.setSeed(42);
