@@ -30,13 +30,7 @@ public class Headline {
             res += word + " ";
         }
         res = res.substring(0, res.length() - 1) + ".";
-        try{
-            PrintStream printStream = new PrintStream(System.out, true, "UTF-8");
-            printStream.println(res);
-        }
-        catch ( java.io.UnsupportedEncodingException ex){
-            System.out.println("Can not write in console");
-        }
+        System.out.println(res);
     }
     private void splitSentence(String sentence){
         final char[] special_symbols = {',', ':', ';', ' ', '(', ')', '\n', '-'};

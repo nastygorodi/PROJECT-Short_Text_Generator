@@ -1,4 +1,5 @@
 package org.example;
+import javax.annotation.processing.SupportedSourceVersion;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -38,7 +39,6 @@ public class FileWorker {
             String sentence = "";
             String line = reader.readLine() + "\n";
             while (line != null) {
-                //System.out.println(line);
                 line = line.replace(" -", " ");
                 for (int i = 0; i < line.length(); i++){
                     if (line.charAt(i) == '?' || line.charAt(i) == '!' || line.charAt(i) == '.'){
